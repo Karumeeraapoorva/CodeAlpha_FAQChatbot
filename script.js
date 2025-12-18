@@ -1,51 +1,45 @@
 const faqs = [
-  {
-    q: "What is CodeAlpha?",
-    a: "CodeAlpha is a software company providing internships in AI, Web and App Development."
-  },
-  {
-    q: "What is the duration of internship?",
-    a: "The internship duration is typically 1 month."
-  },
-  {
-    q: "Will I get a certificate?",
-    a: "Yes, you will receive a QR verified completion certificate."
-  },
-  {
-    q: "Is this internship paid?",
-    a: "Currently, CodeAlpha internships are unpaid but provide learning and certification."
-  },
-  {
-    q: "How many tasks should I complete?",
-    a: "You must complete at least 2 or 3 tasks to be eligible for the certificate."
-  },
-  {
-    q: "Do I get placement support?",
-    a: "Yes, placement and resume support is provided based on performance."
-  }
+  { q: "What is CodeAlpha?", a: "CodeAlpha is a company providing internships in AI, Web and App Development." },
+  { q: "What is CodeAlpha internship?", a: "It is an online internship program focused on practical projects." },
+  { q: "Is CodeAlpha internship free?", a: "Yes, the internship is completely free." },
+  { q: "Is CodeAlpha internship paid?", a: "No, the internship is unpaid." },
+  { q: "What is the duration of internship?", a: "The duration is usually one month." },
+  { q: "How many tasks should I complete?", a: "You need to complete at least two or three tasks." },
+  { q: "Will I get a certificate?", a: "Yes, you will receive a QR verified completion certificate." },
+  { q: "Will I get an offer letter?", a: "Yes, an offer letter is provided at the start." },
+  { q: "Is there a letter of recommendation?", a: "Yes, based on your performance." },
+  { q: "Is this internship online?", a: "Yes, it is fully online." },
+  { q: "Can beginners apply?", a: "Yes, beginners are welcome." },
+  { q: "Is GitHub mandatory?", a: "Yes, GitHub is required for code submission." },
+  { q: "How do I submit my tasks?", a: "Tasks must be submitted through the submission form." },
+  { q: "What domains are available?", a: "AI, Web Development and App Development." },
+  { q: "Can I do more than three tasks?", a: "Yes, you can complete more tasks if you want." },
+  { q: "Is placement support provided?", a: "Yes, placement support is available." },
+  { q: "Is this internship useful for resume?", a: "Yes, it adds real project experience." },
+  { q: "Do I need prior experience?", a: "No prior experience is required." },
+  { q: "Who can apply for this internship?", a: "Students and freshers interested in technology." },
+  { q: "What happens if I complete only one task?", a: "One task is considered incomplete." }
 ];
 
-function similarity(a, b) {
-  a = a.toLowerCase();
-  b = b.toLowerCase();
-  let matches = 0;
-  a.split(" ").forEach(word => {
-    if (b.includes(word)) matches++;
-  });
-  return matches;
-}
-
 function getAnswer(userQ) {
-  let bestMatch = { score: 0, answer: "Sorry 🤔 I didn't understand that." };
+  userQ = userQ.toLowerCase();
+  let bestScore = 0;
+  let bestAnswer = "Sorry 😅 I am still learning. Please ask about CodeAlpha internship.";
 
   faqs.forEach(faq => {
-    const score = similarity(userQ, faq.q);
-    if (score > bestMatch.score) {
-      bestMatch = { score, answer: faq.a };
+    let score = 0;
+    userQ.split(" ").forEach(word => {
+      if (faq.q.toLowerCase().includes(word)) {
+        score++;
+      }
+    });
+    if (score > bestScore) {
+      bestScore = score;
+      bestAnswer = faq.a;
     }
   });
 
-  return bestMatch.answer;
+  return bestAnswer;
 }
 
 function sendMessage() {
